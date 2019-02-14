@@ -11,7 +11,7 @@ import { map, catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-  private url = 'http://localhost:5000';
+  private url = 'http://localhost:5003';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -40,7 +40,7 @@ export class UserService {
         this.httpOptions
       )
       .pipe(
-        tap(_ => console.log(`Updated user with ${userData}`)),
+        tap(_ => console.log(`Updated user with ${JSON.stringify(userData)}`)),
         catchError(this.handleError<any>('updateUser'))
       );
   }

@@ -5,8 +5,15 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "set NODE_ENV=development&&nodemon server",
-    "prod": "set NODE_ENV=production&&nodemon server",
+    "dev-admin": "set NODE_ENV=development&&nodemon admin-server",
+    "dev-card":"set NODE_ENV=development&&nodemon card-server",
+    "dev-project":"set NODE_ENV=development&&nodemon project-server",
+    "dev-user":"set NODE_ENV=development&&nodemon user-server",
+
+    "prod":"set NODE_ENV=production&&nodemon admin-server",
+    "prod2":"set NODE_ENV=production&&nodemon card-server",
+    "prod3":"set NODE_ENV=production&&nodemon project-server",
+    "prod4":"set NODE_ENV=production&&nodemon user-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

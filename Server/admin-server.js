@@ -14,10 +14,7 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-const adminRoute = require('./route-api/admin-route');
-const userRoute = require('./route-api/user-route');
-const projectRoute = require('./route-api/project-route');
-const cardRoute = require('./route-api/card-route');
+const adminRoute = require('./admin-api/admin-route');
 
 app.set('secretKey', process.env.secretKey); //Set Key for json web token
 app.use(bodyParser.json());
@@ -73,9 +70,6 @@ app.get('/', (req, res) => {
     res.send({ express: 'You are now connected to the Backend' });
 });
 
-app.use('/user', userRoute);
 app.use('/admin', adminRoute);
-app.use('/project', projectRoute);
-app.use('/card', cardRoute);
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));

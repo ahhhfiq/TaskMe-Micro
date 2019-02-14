@@ -3,7 +3,7 @@ const ejwt = require('express-jwt');
 
 const router = express.Router();
 
-const projectController = require('../project-api/project-controller');
+const projectController = require('./project-controller');
 
 const auth = ejwt({
     secret: process.env.secretKey,

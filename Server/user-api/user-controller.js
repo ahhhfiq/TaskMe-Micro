@@ -78,22 +78,62 @@ module.exports = {
         } else {
             // Otherwise continue
             userModel.findById(req.payload.id).exec(function(err, user) {
-                const filterUser = _.omit(user.toObject(), [
-                    'password'
-                ]); //Removing the password field from response
+                const filterUser = _.omit(user.toObject(), ['password']); //Removing the password field from response
                 res.status(200).json(filterUser);
             });
         }
     },
     userUpdate: (req, res) => {
+        // console.log(req);
 
-        req.body.password = bcrypt.hashSync(req.body.password, 10);
+        // if (req.body.username == null || req.body.username == undefined) {
+        //     //User wants to update only their password
+        //     req.body.password = bcrypt.hashSync(req.body.password, 10);
+        //     userModel
+        //         .findOneAndUpdate(
+        //             { username: req.params.username },
+        //             {
+        //                 username: req.params.username,
+        //                 password: req.body.password
+        //             }
+        //         )
+        //         .then(user => {
+        //             res.status(200).send(user);
+        //         })
+        //         .catch(err => {
+        //             res.status(500).send(err);
+        //         });
+        // } else if (
+        //     req.body.password == null ||
+        //     req.body.password == undefined
+        // ) {
+        //     //User wants to update their username only
+        //     userModel.find({ username: req.body.username }).then(userInfo => {
+        //         userModel
+        //             .findOneAndUpdate(
+        //                 { username: req.body.username },
+        //                 { username: req.body.user, password: userInfo.password }
+        //             )
+        //             .then(user => {
+        //                 res.status(200).send(user);
+        //             }).catch(err) ;
+        //     });
+        // } else {
+        //     userModel
+        //         .findOneAndUpdate({ username: req.params.username }, req.body)
+        //         .then(user => {
+        //             res.status(200).send(user)
+        //         }).catch(err => {
+        //             res.status(200).send(err)
+        //         });
+        // }
         userModel
-            .findOneAndUpdate({ username: req.params.username }, req.body)
+            .findOneAndUpdate({ username: req.params.username }, { $set: { username: req.body.username }}, { new : true})
             .then(user => {
-                res.status(200).send(user)
-            }).catch(err => {
-                res.status(200).send(err)
+                res.status(200).send(user);
+            })
+            .catch(err => {
+                res.status(200).send(err);
             });
     },
     userDelete: (req, res) => {
